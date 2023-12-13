@@ -16,11 +16,8 @@ export class LoginComponent {
     }
 
     login() {
-    // Perform login authentication logic here
-    // For example, you can call an authentication service and handle login
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    // Your login logic goes here...
-    this.loginService.login(this.email, this.password);
+      console.log('Email:', this.email);
+      console.log('Password:', this.password);
+      this.loginService.login(this.email, this.password);
   }
 }

@@ -1,0 +1,29 @@
+<div class="container mt-5">
+    <h2>User List</h2>
+  
+    <div *ngIf="hasPermission">
+      <table class="table table-striped table-bordered">
+        <thead class="thead-dark">
+          <tr>
+            <th>Ime</th>
+            <th>Prezime</th>
+            <th>Email</th>
+            <th>Permisije</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of users">
+            <td>{{ user.firstName }}</td>
+            <td>{{ user.lastName }}</td>
+            <td>{{ user.email }}</td>
+            <td>{{ user.authorities }}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <div *ngIf="!hasPermission" class="alert alert-danger">
+      <p>Error: You don't have permission for this action.</p>
+    </div>
+  </div>
+  

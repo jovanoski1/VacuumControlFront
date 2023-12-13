@@ -7,4 +7,12 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'UserManagementFront';
+
+  logout(){
+    localStorage.removeItem('jwt');
+    localStorage.removeItem('canReadUsers');
+    localStorage.removeItem('canCreateUsers');
+    localStorage.removeItem('canDeleteUsers');
+    localStorage.removeItem('canUpdateUsers')
+  }
 }
