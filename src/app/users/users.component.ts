@@ -19,8 +19,24 @@ export class UsersComponent {
     this.router.navigate(['/update']);
   }
 
+  deleteUser(user: User) {
+    console.log('Deleting user:', user);
+    this.userService.deleteUser(user).subscribe({
+      next: (result: any) => {
+        this.users = this.users.filter(u => u.userId !== user.userId);
+      },
+      error: (error: any) => {
+        console.log('Error:', error);
+      }
+    })
+  }
+
   enableClick(): boolean {
     return localStorage.getItem('canUpdateUsers') === 'true';
+  }
+
+  enableDelete(): boolean {
+    return localStorage.getItem('canDeleteUsers') === 'true';
   }
 
   ngOnInit(): void {

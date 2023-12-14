@@ -1,3 +1,5 @@
+<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet">
+
 <div class="container mt-5">
     <h2>User List</h2>
   
@@ -9,6 +11,7 @@
             <th>Prezime</th>
             <th>Email</th>
             <th>Permisije</th>
+            <th *ngIf="enableDelete();">Action</th>
           </tr>
         </thead>
         <tbody>
@@ -20,6 +23,11 @@
               <ng-template #notClickable>{{ user.email }}</ng-template>
             </td>           
             <td>{{ user.authorities }}</td>
+            <td *ngIf="enableDelete();" >
+              <button (click)="deleteUser(user)" type="button" class="btn btn-danger">
+                <i class="fas fa-trash-alt"></i> Delete
+              </button>
+            </td>
           </tr>
         </tbody>
       </table>

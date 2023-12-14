@@ -36,4 +36,12 @@ export class UserService {
     });
   }
 
+  public deleteUser(user: User): Observable<any> {
+    return this.http.delete('http://localhost:8080/users/' + user.userId,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
 }
