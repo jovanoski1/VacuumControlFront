@@ -5,3 +5,11 @@ export interface User {
     email: string;
     authorities: string[];
 }
+
+export interface NewUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    authorities: string;
+}

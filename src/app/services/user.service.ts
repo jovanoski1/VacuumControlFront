@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { User } from '../model';
+import { NewUser, User } from '../model';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -17,4 +17,13 @@ export class UserService {
       }
     });
   }
+
+  public createUser(user: NewUser): Observable<User> {
+    return this.http.post<User>('http://localhost:8080/users', user,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
 }
