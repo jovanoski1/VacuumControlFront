@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-users',
@@ -11,7 +12,16 @@ export class UsersComponent {
   users: User[] = [];
   hasPermission = false;
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, private router: Router) { }
+
+  redirectToUserDetails(user: User) {
+    this.userService.selectedUser = user;
+    this.router.navigate(['/update']);
+  }
+
+  enableClick(): boolean {
+    return localStorage.getItem('canUpdateUsers') === 'true';
+  }
 
   ngOnInit(): void {
     this.hasPermission = localStorage.getItem('canReadUsers') === 'true';

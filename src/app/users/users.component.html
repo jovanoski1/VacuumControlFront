@@ -15,7 +15,10 @@
           <tr *ngFor="let user of users">
             <td>{{ user.firstName }}</td>
             <td>{{ user.lastName }}</td>
-            <td>{{ user.email }}</td>
+            <td>
+              <span *ngIf="enableClick(); else notClickable" (click)="redirectToUserDetails(user)" style="cursor: pointer; text-decoration: underline; color: blue">{{ user.email }}</span>
+              <ng-template #notClickable>{{ user.email }}</ng-template>
+            </td>           
             <td>{{ user.authorities }}</td>
           </tr>
         </tbody>

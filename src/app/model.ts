@@ -13,3 +13,10 @@ export interface NewUser {
     password: string;
     authorities: string;
 }
+
+export interface UpdateUser {
+    firstName: string;
+    lastName: string;
+    email: string;
+    authorities: string;
+}
