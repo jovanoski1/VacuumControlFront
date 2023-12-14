@@ -4,6 +4,7 @@ import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { CreateComponent } from './create/create.component';
 import { createAuthGuard } from './create-auth.guard';
+import { readAuthGuard } from './read-auth.guard';
 
 const routes: Routes = [
   {
@@ -13,6 +14,7 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
+    canActivate: [readAuthGuard]
   },
   {
     path: 'create',
