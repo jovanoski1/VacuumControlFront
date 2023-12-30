@@ -19,6 +19,14 @@
       </div>
       <div class="mb-3">
         <label class="form-check-label">Permissions:</label>
+        <div class="form-check" *ngFor="let role of roleService.allRoles">
+          <input class="form-check-input" type="checkbox" [id]="role.role" [name]="role.role" [ngModel]="checkPermission(role)" (ngModelChange)="togglePermission($event, role)">
+          <label class="form-check-label" [for]="role.role">{{ role.role }}</label>
+        </div>
+      </div>
+      
+      <!-- <div class="mb-3">
+        <label class="form-check-label">Permissions:</label>
         <div class="form-check">
           <input class="form-check-input" type="checkbox" id="canCreateUsers" name="canCreateUsers" [(ngModel)]="user.can_create_users">
           <label class="form-check-label" for="canCreateUsers">Can Create Users</label>
@@ -35,7 +43,7 @@
           <input class="form-check-input" type="checkbox" id="canDeleteUsers" name="canDeleteUsers" [(ngModel)]="user.can_delete_users">
           <label class="form-check-label" for="canDeleteUsers">Can Delete Users</label>
         </div>
-      </div>
+      </div> -->
       <button type="submit" class="btn btn-primary">Add User</button>
     </form>
   </div>

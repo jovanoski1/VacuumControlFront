@@ -1,9 +1,14 @@
+export interface Role{
+    id: number;
+    role: string;
+}
+
 export interface User {
     userId: number;
     firstName: string;
     lastName: string;
     email: string;
-    authorities: string[];
+    permissions: Role[];
 }
 
 export interface NewUser {
@@ -11,12 +16,12 @@ export interface NewUser {
     lastName: string;
     email: string;
     password: string;
-    authorities: string;
+    permissions: Role[];
 }
 
 export interface UpdateUser {
     firstName: string;
     lastName: string;
     email: string;
-    authorities: string;
+    permissions: string[];
 }

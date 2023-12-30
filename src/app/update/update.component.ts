@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
-import { UpdateUser, User } from '../model';
+import { UpdateUser, User, Role } from '../model';
 
 @Component({
   selector: 'app-update',
@@ -28,10 +28,10 @@ export class UpdateComponent {
     this.user.firstName = this.userService.selectedUser?.firstName as string;
     this.user.lastName = this.userService.selectedUser?.lastName as string;
     this.user.email = this.userService.selectedUser?.email as string;
-    this.user.can_create_users = this.userService.selectedUser?.authorities.includes('can_create_users') as boolean;
-    this.user.can_read_users = this.userService.selectedUser?.authorities.includes('can_read_users') as boolean;
-    this.user.can_update_users = this.userService.selectedUser?.authorities.includes('can_update_users') as boolean;
-    this.user.can_delete_users = this.userService.selectedUser?.authorities.includes('can_delete_users') as boolean;
+    this.user.can_create_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_create_users') as boolean;
+    this.user.can_read_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_read_users') as boolean;
+    this.user.can_update_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_update_users') as boolean;
+    this.user.can_delete_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_delete_users') as boolean;
   }
 
   onSubmit() {
@@ -39,26 +39,23 @@ export class UpdateComponent {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
-      authorities: ''
+      permissions: [],
     };
 
     if (this.user.can_create_users) {
-      newUser.authorities+=('can_create_users');
+      newUser.permissions.push('can_create_users');
     }
   
     if (this.user.can_read_users) {
-      newUser.authorities+=(',can_read_users');
+      newUser.permissions.push('can_read_users');
     }
   
     if (this.user.can_update_users) {
-      newUser.authorities+=(',can_update_users');
+      newUser.permissions.push('can_update_users');
     }
   
     if (this.user.can_delete_users) {
-      newUser.authorities+=(',can_delete_users');
-    }
-    if(newUser.authorities.charAt(0)==','){
-      newUser.authorities=newUser.authorities.substring(1);
+      newUser.permissions.push('can_delete_users');
     }
 
     this.userService.updateUser(newUser).subscribe({

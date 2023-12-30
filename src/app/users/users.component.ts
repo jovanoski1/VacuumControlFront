@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../model';
 import { Router } from '@angular/router';
+import { RoleService } from '../services/role.service';
 
 @Component({
   selector: 'app-users',
@@ -12,7 +13,7 @@ export class UsersComponent {
   users: User[] = [];
   hasPermission = false;
 
-  constructor(private userService: UserService, private router: Router) { }
+  constructor(private userService: UserService, private roleService: RoleService,private router: Router) { }
 
   redirectToUserDetails(user: User) {
     this.userService.selectedUser = user;
@@ -41,6 +42,15 @@ export class UsersComponent {
 
   ngOnInit(): void {
     this.hasPermission = localStorage.getItem('canReadUsers') === 'true';
+    this.roleService.getRoles().subscribe({
+      next: (result: any) => {
+        console.log('Roles:', result);
+        this.roleService.allRoles = result;
+      },
+      error: (error: any) => {
+        console.log('Error:', error);
+      }
+    })
     this.userService.getUsers().subscribe({
       next: (result: User[]) => {
         this.users = result;

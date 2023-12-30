@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { UserService } from '../services/user.service';
-import { NewUser, User } from '../model';
+import { NewUser, User, Role } from '../model';
+import { RoleService } from '../services/role.service';
 
 @Component({
   selector: 'app-create',
@@ -8,18 +9,21 @@ import { NewUser, User } from '../model';
   styleUrls: ['./create.component.css']
 })
 export class CreateComponent {
-  user = {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    permissions: Role[];
+  } = {
     firstName: '',
     lastName: '',
     email: '',
     password: '',
-    can_create_users: false,
-    can_read_users: false,
-    can_update_users: false,
-    can_delete_users: false
+    permissions: [],
   };
 
-  constructor(private userService: UserService) { }
+  constructor(private userService: UserService, public roleService: RoleService) { }
 
   onSubmit() {
     const newUser: NewUser = {
@@ -27,27 +31,11 @@ export class CreateComponent {
       lastName: this.user.lastName,
       email: this.user.email,
       password: this.user.password,
-      authorities: ''
+      permissions: this.user.permissions,
     };
 
-    if (this.user.can_create_users) {
-      newUser.authorities+=('can_create_users');
-    }
-  
-    if (this.user.can_read_users) {
-      newUser.authorities+=(',can_read_users');
-    }
-  
-    if (this.user.can_update_users) {
-      newUser.authorities+=(',can_update_users');
-    }
-  
-    if (this.user.can_delete_users) {
-      newUser.authorities+=(',can_delete_users');
-    }
-    if(newUser.authorities.charAt(0)==','){
-      newUser.authorities=newUser.authorities.substring(1);
-    }
+    console.log(newUser);
+
 
     this.userService.createUser(newUser).subscribe({
       next: (result: User) => {
@@ -73,4 +61,23 @@ export class CreateComponent {
       }
     });
   }
+
+  checkPermission(role: Role): boolean {
+    return this.user.permissions.some(userRole => userRole.role === role.role);
+  }
+
+  togglePermission(event: any, role: Role): void {
+    const existingRoleIndex = this.user.permissions.findIndex(userRole => userRole.role === role.role);
+    console.log('Existing role index:', event);
+    if (event) {
+      if (existingRoleIndex === -1) {
+        this.user.permissions.push(role);
+      }
+    } else {
+      if (existingRoleIndex !== -1) {
+        this.user.permissions.splice(existingRoleIndex, 1);
+      }
+    }
+  }
+
 }

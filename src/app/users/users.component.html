@@ -11,6 +11,9 @@
             <th>Prezime</th>
             <th>Email</th>
             <th>Permisije</th>
+            <th>Permisije</th>
+            <th>Permisije</th>
+            <th>Permisije</th>
             <th *ngIf="enableDelete();">Action</th>
           </tr>
         </thead>
@@ -22,7 +25,10 @@
               <span *ngIf="enableClick(); else notClickable" (click)="redirectToUserDetails(user)" style="cursor: pointer; text-decoration: underline; color: blue">{{ user.email }}</span>
               <ng-template #notClickable>{{ user.email }}</ng-template>
             </td>           
-            <td>{{ user.authorities }}</td>
+            <td>{{ user.permissions[0].role }}</td>
+            <td>{{ user.permissions[0].role }}</td>
+            <td>{{ user.permissions[0].role }}</td>
+            <td>{{ user.permissions[0].role }}</td>
             <td *ngIf="enableDelete();" >
               <button (click)="deleteUser(user)" type="button" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i> Delete
