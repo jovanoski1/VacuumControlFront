@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { UserService } from '../services/user.service';
 import { UpdateUser, User, Role } from '../model';
+import { RoleService } from '../services/role.service';
 
 @Component({
   selector: 'app-update',
@@ -9,17 +10,21 @@ import { UpdateUser, User, Role } from '../model';
   styleUrls: ['./update.component.css']
 })
 export class UpdateComponent {
-  user = {
+  user: {
+    firstName: string;
+    lastName: string;
+    email: string;
+    password: string;
+    permissions: Role[];
+  } = {
     firstName: '',
     lastName: '',
     email: '',
-    can_create_users: false,
-    can_read_users: false,
-    can_update_users: false,
-    can_delete_users: false
+    password: '',
+    permissions: [],
   };
 
-  constructor(private route: Router, private userService: UserService) {
+  constructor(private route: Router, public roleService: RoleService,private userService: UserService) {
     // console.log('User:', this.route.snapshot?.data?.['user']);
   }
 
@@ -28,10 +33,11 @@ export class UpdateComponent {
     this.user.firstName = this.userService.selectedUser?.firstName as string;
     this.user.lastName = this.userService.selectedUser?.lastName as string;
     this.user.email = this.userService.selectedUser?.email as string;
-    this.user.can_create_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_create_users') as boolean;
-    this.user.can_read_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_read_users') as boolean;
-    this.user.can_update_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_update_users') as boolean;
-    this.user.can_delete_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_delete_users') as boolean;
+    this.user.permissions = this.userService.selectedUser?.permissions as Role[];
+    // this.user.can_create_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_create_users') as boolean;
+    // this.user.can_read_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_read_users') as boolean;
+    // this.user.can_update_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_update_users') as boolean;
+    // this.user.can_delete_users = this.userService.selectedUser?.permissions.some(role => role.role == 'can_delete_users') as boolean;
   }
 
   onSubmit() {
@@ -39,25 +45,8 @@ export class UpdateComponent {
       firstName: this.user.firstName,
       lastName: this.user.lastName,
       email: this.user.email,
-      permissions: [],
+      permissions: this.user.permissions,
     };
-
-    if (this.user.can_create_users) {
-      newUser.permissions.push('can_create_users');
-    }
-  
-    if (this.user.can_read_users) {
-      newUser.permissions.push('can_read_users');
-    }
-  
-    if (this.user.can_update_users) {
-      newUser.permissions.push('can_update_users');
-    }
-  
-    if (this.user.can_delete_users) {
-      newUser.permissions.push('can_delete_users');
-    }
-
     this.userService.updateUser(newUser).subscribe({
       next: (result: User) => {
         // console.log('User created:', result);
@@ -82,5 +71,23 @@ export class UpdateComponent {
         alert(errorMsg);
       }
     });
+  }
+
+  checkPermission(role: Role): boolean {
+    return this.user.permissions.some(userRole => userRole.role === role.role);
+  }
+
+  togglePermission(event: any, role: Role): void {
+
+    const existingRoleIndex = this.user.permissions.findIndex(userRole => userRole.role === role.role);
+    if (event) {
+      if (existingRoleIndex === -1) {
+        this.user.permissions.push(role);
+      }
+    } else {
+      if (existingRoleIndex !== -1) {
+        this.user.permissions.splice(existingRoleIndex, 1);
+      }
+    }
   }
 }

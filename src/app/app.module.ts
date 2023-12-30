@@ -9,6 +9,7 @@ import { FormsModule } from '@angular/forms';
 import { UsersComponent } from './users/users.component';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
+import { PermissionCheckPipe } from './pipes/permission-check.pipe';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { UpdateComponent } from './update/update.component';
     LoginComponent,
     UsersComponent,
     CreateComponent,
-    UpdateComponent
+    UpdateComponent,
+    PermissionCheckPipe
   ],
   imports: [
     BrowserModule,

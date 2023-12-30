@@ -10,10 +10,10 @@
             <th>Ime</th>
             <th>Prezime</th>
             <th>Email</th>
-            <th>Permisije</th>
-            <th>Permisije</th>
-            <th>Permisije</th>
-            <th>Permisije</th>
+            <th>can_create_users</th>
+            <th>can_read_users</th>
+            <th>can_update_users</th>
+            <th>can_delete_users</th>
             <th *ngIf="enableDelete();">Action</th>
           </tr>
         </thead>
@@ -25,10 +25,11 @@
               <span *ngIf="enableClick(); else notClickable" (click)="redirectToUserDetails(user)" style="cursor: pointer; text-decoration: underline; color: blue">{{ user.email }}</span>
               <ng-template #notClickable>{{ user.email }}</ng-template>
             </td>           
-            <td>{{ user.permissions[0].role }}</td>
-            <td>{{ user.permissions[0].role }}</td>
-            <td>{{ user.permissions[0].role }}</td>
-            <td>{{ user.permissions[0].role }}</td>
+            <td>{{ user.permissions | permissionCheck: 'can_create_users' }}</td>
+            <td>{{ user.permissions | permissionCheck: 'can_read_users' }}</td>
+            <td>{{ user.permissions | permissionCheck: 'can_update_users' }}</td>
+            <td>{{ user.permissions | permissionCheck: 'can_delete_users' }}</td>
+            
             <td *ngIf="enableDelete();" >
               <button (click)="deleteUser(user)" type="button" class="btn btn-danger">
                 <i class="fas fa-trash-alt"></i> Delete

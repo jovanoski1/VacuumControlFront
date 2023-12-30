@@ -15,21 +15,10 @@
       </div>
       <div class="mb-3">
         <label class="form-check-label">Permissions:</label>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="canCreateUsers" name="canCreateUsers" [(ngModel)]="user.can_create_users">
-          <label class="form-check-label" for="canCreateUsers">Can Create Users</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="canReadUsers" name="canReadUsers" [(ngModel)]="user.can_read_users">
-          <label class="form-check-label" for="canReadUsers">Can Read Users</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="canUpdateUsers" name="canUpdateUsers" [(ngModel)]="user.can_update_users">
-          <label class="form-check-label" for="canUpdateUsers">Can Update Users</label>
-        </div>
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="canDeleteUsers" name="canDeleteUsers" [(ngModel)]="user.can_delete_users">
-          <label class="form-check-label" for="canDeleteUsers">Can Delete Users</label>
+        
+        <div class="form-check" *ngFor="let role of roleService.allRoles">
+          <input class="form-check-input" type="checkbox" [id]="role.role" [name]="role.role" [ngModel]="checkPermission(role)" (ngModelChange)="togglePermission($event, role)">
+          <label class="form-check-label" [for]="role.role">{{ role.role }}</label>
         </div>
       </div>
       <button type="submit" class="btn btn-primary">Update User</button>
