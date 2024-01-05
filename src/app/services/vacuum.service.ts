@@ -1,7 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { VacuumCleaner } from '../model';
+import { FilterVacuumCleaner, VacuumCleaner } from '../model';
 
 @Injectable({
   providedIn: 'root'
@@ -17,4 +17,13 @@ export class VacuumService {
       }
     });
   }
+
+  public filterVacuum(filterVacuumCleaner: FilterVacuumCleaner): Observable<VacuumCleaner[]>{
+    return this.http.post<VacuumCleaner[]>('http://localhost:8080/cleaners/filter', filterVacuumCleaner, {
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
 }

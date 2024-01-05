@@ -34,6 +34,13 @@ export interface VacuumCleaner{
     numOfCycles: number;
 }
 
+export interface FilterVacuumCleaner{
+    name: string | null;
+    status: string | null;
+    dateFrom: Date | null;
+    dateTo: Date | null;
+}
+
 export enum VacuumStatus{
     STOPPED = 'Stopped',
     RUNNING = 'Running',

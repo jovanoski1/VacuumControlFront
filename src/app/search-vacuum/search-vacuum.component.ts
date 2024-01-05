@@ -8,25 +8,33 @@ import { VacuumService } from '../services/vacuum.service';
   styleUrls: ['./search-vacuum.component.css']
 })
 export class SearchVacuumComponent {
-  name: string;
-  status: string;
+  name: string | null = null;
+  status: string | null = null;
   dateFrom: Date | null = null;
   dateTo: Date | null = null;
   vacuumCleaners: VacuumCleaner[];
   statusOptions = Object.values(VacuumStatus).filter(value => typeof value === 'string');
 
   constructor(private vacuumService: VacuumService) { 
-    this.name = '';
-    this.status = '';
     this.vacuumCleaners = [];
   }
 
   filterVacuumCleaners(): void {
-    console.log('Filtering vacuum cleaners');
-    console.log('Name:', this.name);
-    console.log('Status:', this.status);
-    console.log('Date from:', this.dateFrom);
-    console.log('Date to:', this.dateTo);
+    this.vacuumService.filterVacuum({
+      name: this.name,
+      status: Object.keys(VacuumStatus).find((key) => VacuumStatus[key as keyof typeof VacuumStatus] === this.status) as VacuumStatus,
+      dateFrom: this.dateFrom,
+      dateTo: this.dateTo
+    }).subscribe({
+      next: (result: VacuumCleaner[]) => {
+        this.vacuumCleaners = result;
+        console.log('Filtered vacuum cleaners:', result);
+      },
+      error: (error: any) => {
+        console.log('Error:', error);
+      }
+    })
+
   }
 
   ngOnInit(): void {
