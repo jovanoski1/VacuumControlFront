@@ -12,6 +12,7 @@ import { UpdateComponent } from './update/update.component';
 import { PermissionCheckPipe } from './pipes/permission-check.pipe';
 import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
 import { CreateVacuumComponent } from './create-vacuum/create-vacuum.component';
+import { ErrorMessagesComponent } from './error-messages/error-messages.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { CreateVacuumComponent } from './create-vacuum/create-vacuum.component';
     UpdateComponent,
     PermissionCheckPipe,
     SearchVacuumComponent,
-    CreateVacuumComponent
+    CreateVacuumComponent,
+    ErrorMessagesComponent
   ],
   imports: [
     BrowserModule,

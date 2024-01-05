@@ -46,3 +46,10 @@ export enum VacuumStatus{
     RUNNING = 'Running',
     DISCHARGING = 'Discharging',
 }
+
+export interface ErrorMessage{
+    id: number;
+    time: string;
+    operation: string;
+    message: string;
+}

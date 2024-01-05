@@ -9,6 +9,7 @@ import { UpdateComponent } from './update/update.component';
 import { updateAuthGuard } from './update-auth.guard';
 import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
 import { CreateVacuumComponent } from './create-vacuum/create-vacuum.component';
+import { ErrorMessagesComponent } from './error-messages/error-messages.component';
 
 const routes: Routes = [
   {
@@ -38,6 +39,10 @@ const routes: Routes = [
   {
     path: 'create-vacuum',
     component: CreateVacuumComponent
+  },
+  {
+    path: 'errors',
+    component: ErrorMessagesComponent
   }
 ];
 
