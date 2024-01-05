@@ -7,6 +7,7 @@ import { createAuthGuard } from './create-auth.guard';
 import { readAuthGuard } from './read-auth.guard';
 import { UpdateComponent } from './update/update.component';
 import { updateAuthGuard } from './update-auth.guard';
+import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
 
 const routes: Routes = [
   {
@@ -28,6 +29,10 @@ const routes: Routes = [
     component: UpdateComponent,
     canActivate: [updateAuthGuard]
     // data: { user: "prokic" }
+  },
+  {
+    path: 'search-vacuum',
+    component: SearchVacuumComponent
   }
 ];
 

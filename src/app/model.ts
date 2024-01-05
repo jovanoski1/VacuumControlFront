@@ -25,3 +25,17 @@ export interface UpdateUser {
     email: string;
     permissions: Role[];
 }
+
+export interface VacuumCleaner{
+    id: number;
+    name: string;
+    status: VacuumStatus;
+    active: boolean;
+    numOfCycles: number;
+}
+
+export enum VacuumStatus{
+    STOPPED = 'Stopped',
+    RUNNING = 'Running',
+    DISCHARGING = 'Discharging',
+}

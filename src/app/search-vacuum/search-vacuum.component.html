@@ -1,0 +1,48 @@
+<div class="container">
+    <div class="row align-items-end">
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="nameInput">Name:</label>
+          <input id="nameInput" class="form-control" type="text" [(ngModel)]="name">
+        </div>
+      </div>
+
+      <div class="col-md-3">
+        <div class="form-group">
+          <label for="statusInput">Status:</label>
+          <select id="statusInput" class="form-control" [(ngModel)]="status">
+            <option *ngFor="let statusOption of statusOptions" [value]="statusOption">{{ statusOption }}</option>
+          </select>
+        </div>
+      </div>
+  
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="dateFromInput">Date From:</label>
+          <input id="dateFromInput" class="form-control" type="date" [(ngModel)]="dateFrom">
+        </div>
+      </div>
+  
+      <div class="col-md-2">
+        <div class="form-group">
+          <label for="dateToInput">Date To:</label>
+          <input id="dateToInput" class="form-control" type="date" [(ngModel)]="dateTo">
+        </div>
+      </div>
+
+      <div class="col-md-2">
+        <button class="btn btn-primary" (click)="filterVacuumCleaners()">Filter</button>
+      </div>
+    </div>
+  
+    <div class="row mt-3" *ngIf="vacuumCleaners && vacuumCleaners.length > 0">
+      <div class="col-md-12">
+        <ul class="list-group">
+          <li class="list-group-item" *ngFor="let cleaner of vacuumCleaners">
+            {{ cleaner.name }} - {{ cleaner.status }} - {{ cleaner.active }} - {{ cleaner.numOfCycles}}
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+  

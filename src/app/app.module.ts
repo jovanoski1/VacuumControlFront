@@ -10,6 +10,7 @@ import { UsersComponent } from './users/users.component';
 import { CreateComponent } from './create/create.component';
 import { UpdateComponent } from './update/update.component';
 import { PermissionCheckPipe } from './pipes/permission-check.pipe';
+import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { PermissionCheckPipe } from './pipes/permission-check.pipe';
     UsersComponent,
     CreateComponent,
     UpdateComponent,
-    PermissionCheckPipe
+    PermissionCheckPipe,
+    SearchVacuumComponent
   ],
   imports: [
     BrowserModule,
