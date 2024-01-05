@@ -28,7 +28,7 @@ export class SearchVacuumComponent {
     }).subscribe({
       next: (result: VacuumCleaner[]) => {
         this.vacuumCleaners = result;
-        console.log('Filtered vacuum cleaners:', result);
+        // console.log('Filtered vacuum cleaners:', result);
       },
       error: (error: any) => {
         console.log('Error:', error);
@@ -41,7 +41,7 @@ export class SearchVacuumComponent {
     this.vacuumService.getAllVacuum().subscribe({
       next: (result: VacuumCleaner[]) => {
         this.vacuumCleaners = result;
-        console.log('Vacuum cleaners:', result);
+        // console.log('Vacuum cleaners:', result);
       },
       error: (error: any) => {
         console.log('Error:', error);

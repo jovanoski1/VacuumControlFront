@@ -26,4 +26,12 @@ export class VacuumService {
     });
   }
 
+  public createVacuun(name: string): Observable<VacuumCleaner>{
+    return this.http.get<VacuumCleaner>('http://localhost:8080/cleaners/'+name,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
 }

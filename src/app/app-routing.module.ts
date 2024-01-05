@@ -8,6 +8,7 @@ import { readAuthGuard } from './read-auth.guard';
 import { UpdateComponent } from './update/update.component';
 import { updateAuthGuard } from './update-auth.guard';
 import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
+import { CreateVacuumComponent } from './create-vacuum/create-vacuum.component';
 
 const routes: Routes = [
   {
@@ -33,6 +34,10 @@ const routes: Routes = [
   {
     path: 'search-vacuum',
     component: SearchVacuumComponent
+  },
+  {
+    path: 'create-vacuum',
+    component: CreateVacuumComponent
   }
 ];
 
