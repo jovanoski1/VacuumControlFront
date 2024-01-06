@@ -34,4 +34,27 @@ export class VacuumService {
     });
   }
 
+  public normalOperation(id: number, operation: String): Observable<boolean>{
+    return this.http.get<boolean>('http://localhost:8080/cleaners/'+operation +'/'+id,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
+  public scheduleOperation(id: number, operation: string, date: Date): Observable<boolean>{
+    return this.http.post<boolean>('http://localhost:8080/cleaners/schedule'+this.capitalizeFirstLetter(operation), {
+      id: id,
+      dateTime: date
+    } ,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
+  capitalizeFirstLetter(str: string): string {
+    return str.charAt(0).toUpperCase() + str.slice(1);
+  }
+
 }

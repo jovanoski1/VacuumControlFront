@@ -34,15 +34,9 @@
         <button class="btn btn-primary" (click)="filterVacuumCleaners()">Filter</button>
       </div>
     </div>
-  
-    <div class="row mt-3" *ngIf="vacuumCleaners && vacuumCleaners.length > 0">
-      <div class="col-md-12">
-        <ul class="list-group">
-          <li class="list-group-item" *ngFor="let cleaner of vacuumCleaners">
-            {{ cleaner.name }} - {{ cleaner.status }} - {{ cleaner.active }} - {{ cleaner.numOfCycles}}
-          </li>
-        </ul>
-      </div>
+
+    <div id="accordion" class="mt-5">
+      <app-vacuum-cleaner *ngFor="let cleaner of vacuumCleaners" [cleaner]="cleaner"></app-vacuum-cleaner>
     </div>
   </div>
   

@@ -13,6 +13,7 @@ import { PermissionCheckPipe } from './pipes/permission-check.pipe';
 import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
 import { CreateVacuumComponent } from './create-vacuum/create-vacuum.component';
 import { ErrorMessagesComponent } from './error-messages/error-messages.component';
+import { VacuumCleanerComponent } from './vacuum-cleaner/vacuum-cleaner.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { ErrorMessagesComponent } from './error-messages/error-messages.componen
     PermissionCheckPipe,
     SearchVacuumComponent,
     CreateVacuumComponent,
-    ErrorMessagesComponent
+    ErrorMessagesComponent,
+    VacuumCleanerComponent
   ],
   imports: [
     BrowserModule,
