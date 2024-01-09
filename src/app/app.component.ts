@@ -15,16 +15,17 @@ export class AppComponent {
   constructor(private router: Router) {}
   logout(){
     localStorage.removeItem('jwt');
-    localStorage.removeItem('canReadUsers');
-    localStorage.removeItem('canCreateUsers');
-    localStorage.removeItem('canDeleteUsers');
-    localStorage.removeItem('canUpdateUsers');
-    localStorage.removeItem('canSearchVacuum');
-    localStorage.removeItem('canStartVacuum');
-    localStorage.removeItem('canStopVacuum');
-    localStorage.removeItem('canDischargeVacuum');
-    localStorage.removeItem('canRemoveVacuum');
-    localStorage.removeItem('canAddVacuum');
+    localStorage.removeItem('permissions');
+    // localStorage.removeItem('canReadUsers');
+    // localStorage.removeItem('canCreateUsers');
+    // localStorage.removeItem('canDeleteUsers');
+    // localStorage.removeItem('canUpdateUsers');
+    // localStorage.removeItem('canSearchVacuum');
+    // localStorage.removeItem('canStartVacuum');
+    // localStorage.removeItem('canStopVacuum');
+    // localStorage.removeItem('canDischargeVacuum');
+    // localStorage.removeItem('canRemoveVacuum');
+    // localStorage.removeItem('canAddVacuum');
     this.router.navigate(['']);
   }
 }

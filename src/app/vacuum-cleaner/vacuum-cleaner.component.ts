@@ -77,16 +77,16 @@ export class VacuumCleanerComponent {
   }
 
   canRemove(){
-    return localStorage.getItem('canRemoveVacuum') === 'true';
+    return localStorage.getItem('permissions')?.includes('can_remove_vacuum') === true;
   }
   canStart(){
-    return localStorage.getItem('canStartVacuum') === 'true';
+    return localStorage.getItem('permissions')?.includes('can_start_vacuum') === true;
   }
   canStop(){
-    return localStorage.getItem('canStopVacuum') === 'true';
+    return localStorage.getItem('permissions')?.includes('can_stop_vacuum') === true;
   }
   canDischarge(){
-    return localStorage.getItem('canDischargeVacuum') === 'true';
+    return localStorage.getItem('permissions')?.includes('can_discharge_vacuum') === true;
   }
 }
 

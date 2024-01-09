@@ -1,10 +1,7 @@
-import { inject } from '@angular/core';
-import { CanActivateFn, Router } from '@angular/router';
+import { CanActivateFn } from '@angular/router';
 
 export const createAuthGuard: CanActivateFn = (route, state) => {
-  const router = inject(Router);
-
-  if (!localStorage.getItem('canCreateUsers') || localStorage.getItem('canCreateUsers')==='false') {
+  if(!localStorage.getItem('permissions')?.includes('can_create_users')){
     return false;
   }
   return true;

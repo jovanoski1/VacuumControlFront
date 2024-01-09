@@ -33,15 +33,15 @@ export class UsersComponent {
   }
 
   enableClick(): boolean {
-    return localStorage.getItem('canUpdateUsers') === 'true';
+    return localStorage.getItem('permissions')?.includes('can_update_users') === true;
   }
 
   enableDelete(): boolean {
-    return localStorage.getItem('canDeleteUsers') === 'true';
+    return localStorage.getItem('permissions')?.includes('can_delete_users') === true;
   }
 
   ngOnInit(): void {
-    this.hasPermission = localStorage.getItem('canReadUsers') === 'true';
+    this.hasPermission = localStorage.getItem('permissions')?.includes('can_read_users') === true;
     this.roleService.getRoles().subscribe({
       next: (result: any) => {
         console.log('Roles:', result);
