@@ -29,6 +29,19 @@ export class VacuumCleanerComponent {
     }
   }
 
+  remove(event: Event) {
+    event.stopPropagation();
+    this.vacuumService.remove(this.cleaner).subscribe({
+      next: (result) => {
+        console.log(result);
+        alert('Cleaner '+ this.cleaner.name + ' removed!');
+        window.location.reload();
+      },
+      error: (err) => {
+        console.log(err);
+      }
+    });
+  }
 
   submit() {
     if (!this.selectedDateTime) {
@@ -37,6 +50,9 @@ export class VacuumCleanerComponent {
           console.log(result);
           if (result) {
             alert('Operation '+ this.operation + ' success!');
+            setTimeout(() => {
+              window.location.reload();
+            }, result);
           }
           else {
             alert('Operation '+ this.operation + ' failed!');

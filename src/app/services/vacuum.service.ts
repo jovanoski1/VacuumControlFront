@@ -34,8 +34,8 @@ export class VacuumService {
     });
   }
 
-  public normalOperation(id: number, operation: String): Observable<boolean>{
-    return this.http.get<boolean>('http://localhost:8080/cleaners/'+operation +'/'+id,{
+  public normalOperation(id: number, operation: String): Observable<number>{
+    return this.http.get<number>('http://localhost:8080/cleaners/'+operation +'/'+id,{
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('jwt')
       }
@@ -47,6 +47,14 @@ export class VacuumService {
       id: id,
       dateTime: date
     } ,{
+      headers: {
+        'Authorization': 'Bearer ' + localStorage.getItem('jwt')
+      }
+    });
+  }
+
+  public remove(cleaner: VacuumCleaner): Observable<any> {
+    return this.http.delete('http://localhost:8080/cleaners/remove/' + cleaner.id,{
       headers: {
         'Authorization': 'Bearer ' + localStorage.getItem('jwt')
       }

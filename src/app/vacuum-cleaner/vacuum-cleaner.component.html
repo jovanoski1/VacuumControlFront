@@ -1,13 +1,12 @@
-<a class="card list-group list-group-flush" role="button" style="cursor: pointer;">
-    <div (click)="toggleCollapse()" class="card-header" [id]="'heading' + cleaner.id">
-      <p class="mb-0">
-        <!-- <button class="btn btn-link" type="button" (click)="toggleCollapse()" aria-expanded="true" [attr.aria-controls]="'collapse' + cleaner.id"> -->
+<a [ngStyle]="{'color': cleaner.active ? 'inherit' : 'gray'}" class="card list-group list-group-flush" role="button" style="cursor: pointer; text-decoration: none;">
+    <div (click)="toggleCollapse()" class="card-header d-flex justify-content-between" [id]="'heading' + cleaner.id">
+        <p class="mt-auto mb-auto" style="font-size: larger;">
           {{ cleaner.name }}
-        <!-- </button> -->
         </p>
+        <button class="btn btn-danger" [disabled]="!cleaner.active" (click)="remove($event)">Remove</button>
     </div>
   
-    <div [id]="'collapse' + cleaner.id" class="collapse" [attr.aria-labelledby]="'heading' + cleaner.id">
+    <div [id]="'collapse' + cleaner.id" class="collapse" [attr.aria-labelledby]="'heading' + cleaner.id" [ngStyle]="{'cursor': cleaner.active ? 'pointer' : 'not-allowed', 'pointer-events': cleaner.active ? 'auto' : 'none', 'color': cleaner.active ? 'inherit' : 'gray'}">
         <div class="card-body">
             <p class="card-text">ID: {{ cleaner.id }}</p>
             <p class="card-text">Status: {{ cleaner.status }}</p>
@@ -16,7 +15,7 @@
           
             <div class="form-group">
               <label for="operationSelect">Operation:</label>
-              <select class="form-control" [(ngModel)]="operation" id="operationSelect">
+              <select [disabled]="!cleaner.active" class="form-control" [(ngModel)]="operation" id="operationSelect">
                 <option value="start">Start</option>
                 <option value="stop">Stop</option>
                 <option value="discharge">Discharge</option>
@@ -33,7 +32,7 @@
               <input type="datetime-local" [(ngModel)]="selectedDateTime" class="form-control" id="dateTimePicker">
             </div>
 
-            <button (click)="submit()" class="btn btn-primary mt-3">Submit</button>
+            <button (click)="submit()" class="btn btn-primary mt-3" [disabled]="!cleaner.active">Submit</button>
           </div>
           
     </div>
