@@ -19,6 +19,12 @@ export class AppComponent {
     localStorage.removeItem('canCreateUsers');
     localStorage.removeItem('canDeleteUsers');
     localStorage.removeItem('canUpdateUsers');
+    localStorage.removeItem('canSearchVacuum');
+    localStorage.removeItem('canStartVacuum');
+    localStorage.removeItem('canStopVacuum');
+    localStorage.removeItem('canDischargeVacuum');
+    localStorage.removeItem('canRemoveVacuum');
+    localStorage.removeItem('canAddVacuum');
     this.router.navigate(['']);
   }
 }

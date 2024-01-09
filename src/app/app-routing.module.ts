@@ -3,13 +3,15 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { UsersComponent } from './users/users.component';
 import { CreateComponent } from './create/create.component';
-import { createAuthGuard } from './create-auth.guard';
-import { readAuthGuard } from './read-auth.guard';
+import { createAuthGuard } from './guards/create-auth.guard';
+import { readAuthGuard } from './guards/read-auth.guard';
 import { UpdateComponent } from './update/update.component';
-import { updateAuthGuard } from './update-auth.guard';
+import { updateAuthGuard } from './guards/update-auth.guard';
 import { SearchVacuumComponent } from './search-vacuum/search-vacuum.component';
 import { CreateVacuumComponent } from './create-vacuum/create-vacuum.component';
 import { ErrorMessagesComponent } from './error-messages/error-messages.component';
+import { searchVaccumGuard } from './guards/search-vaccum.guard';
+import { createVacuumGuard } from './guards/create-vacuum.guard';
 
 const routes: Routes = [
   {
@@ -19,7 +21,7 @@ const routes: Routes = [
   {
     path: 'users',
     component: UsersComponent,
-    // canActivate: [readAuthGuard]
+    canActivate: [readAuthGuard]
   },
   {
     path: 'create',
@@ -30,15 +32,16 @@ const routes: Routes = [
     path: 'update',
     component: UpdateComponent,
     canActivate: [updateAuthGuard]
-    // data: { user: "prokic" }
   },
   {
     path: 'search-vacuum',
-    component: SearchVacuumComponent
+    component: SearchVacuumComponent,
+    canActivate: [searchVaccumGuard]
   },
   {
     path: 'create-vacuum',
-    component: CreateVacuumComponent
+    component: CreateVacuumComponent,
+    canActivate: [createVacuumGuard]
   },
   {
     path: 'errors',
