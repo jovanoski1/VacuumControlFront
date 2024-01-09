@@ -75,5 +75,18 @@ export class VacuumCleanerComponent {
       });
     }
   }
+
+  canRemove(){
+    return localStorage.getItem('canRemoveVacuum') === 'true';
+  }
+  canStart(){
+    return localStorage.getItem('canStartVacuum') === 'true';
+  }
+  canStop(){
+    return localStorage.getItem('canStopVacuum') === 'true';
+  }
+  canDischarge(){
+    return localStorage.getItem('canDischargeVacuum') === 'true';
+  }
 }
 

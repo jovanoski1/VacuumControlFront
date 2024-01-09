@@ -3,7 +3,7 @@
         <p class="mt-auto mb-auto" style="font-size: larger;">
           {{ cleaner.name }}
         </p>
-        <button class="btn btn-danger" [disabled]="!cleaner.active" (click)="remove($event)">Remove</button>
+        <button class="btn btn-danger" *ngIf="canRemove();" [disabled]="!cleaner.active" (click)="remove($event)">Remove</button>
     </div>
   
     <div [id]="'collapse' + cleaner.id" class="collapse" [attr.aria-labelledby]="'heading' + cleaner.id" [ngStyle]="{'cursor': cleaner.active ? 'pointer' : 'not-allowed', 'pointer-events': cleaner.active ? 'auto' : 'none', 'color': cleaner.active ? 'inherit' : 'gray'}">
@@ -16,9 +16,9 @@
             <div class="form-group">
               <label for="operationSelect">Operation:</label>
               <select [disabled]="!cleaner.active" class="form-control" [(ngModel)]="operation" id="operationSelect">
-                <option value="start">Start</option>
-                <option value="stop">Stop</option>
-                <option value="discharge">Discharge</option>
+                <option *ngIf="canStart();" value="start">Start</option>
+                <option *ngIf="canStop();" value="stop">Stop</option>
+                <option *ngIf="canDischarge();" value="discharge">Discharge</option>
               </select>
             </div>
           
